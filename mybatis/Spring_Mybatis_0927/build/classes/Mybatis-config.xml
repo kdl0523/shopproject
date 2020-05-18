@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<!-- 저 위에 configuration이라는 -->
+<configuration>
+	<!-- 자바쪽  com.Employee.DAOVO.EmployeeVO 클래스 VO와
+		 sql쪽 <select ...>와 mapping ... 
+		 sql쪽 alias는 sawon이기때문에 여기서도 alias를 sawon으로 맞춰줌
+	-->
+	<typeAliases>
+		<typeAlias type="com.Employee.DAOVO.EmployeeVO" alias="sawon"/>
+	</typeAliases>
+	
+	<!-- envireonments안에 여러개의 environment가 나올 수 있다 -->
+	<environments default="development">
+		<environment id="development">
+		<!-- JDBC(commit, rollbak), MANAGED중 선택 -->
+		<!-- 트랜잭션(더이상 쪼개질 수 없는것) 중 하나 : tx -->
+		<transactionManager type="JDBC"/>
+			<dataSource type="POOLED"> <!-- unpooled : pool사용X -->
+			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="username" value="hr" />
+			<property name="password" value="hr" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="com/Employee/DAOVO/employees-mapper.xml"></mapper>
+	</mappers>
+</configuration>
